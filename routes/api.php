@@ -14,6 +14,7 @@ use App\Http\Resources\IncidenciasResource;
 use App\Models\Usuarios;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Resources\UsuariosResource;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,12 @@ use App\Http\Resources\UsuariosResource;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('mail/send', 'MailController@send');
+
+Route::get('/enviarMail/{incidenia}',function ($incidencia){
+    return new Mail(Aula::findOrFail($incidencia));
+});
 
 Route::get('/aula/{id}',function ($id){
     return new AulaResource(Aula::findOrFail($id));
